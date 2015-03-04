@@ -1,0 +1,41 @@
+s=raw_input()
+def getResistance(s):	
+	i=0
+	l=len(s)
+	a=[]
+	while (i<l):
+		r=""
+		j=i
+		if (s[i]=='|' or s[i]=='+' or s[i]=='(' or s[i]==')'):
+			a.append(s[i])
+			i=i+1
+		else:
+			while (j<l and(s[j]!='|' and s[j]!='+' and s[j]!='(' and s[j]!=')') ):
+				r=r+s[j]
+				j=j+1
+			a.append(float(r))
+			i=j
+	l=len(a)
+	while l>1:
+		i=1
+		while (i<(l-1)):
+			if (type(a[i-1])==float and type(a[i+1])==float):
+				if a[i]=='+':
+					eff=a[i-1]+a[i+1]
+				else :
+					eff=float(a[i-1]*a[i+1])/(a[i-1]+a[i+1])
+	
+				a[i-1]=eff
+				del a[i]
+				del a[i]
+				l=l-2
+			elif (a[i-1]=='(' and a[i+1]==')'):
+				del a[i-1]
+				del a[i]
+				l=l-2
+			
+			else:
+				i=i+1
+	print a[0]
+
+getResistance(s)
